@@ -1,0 +1,28 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title HotDesk
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    %nav.navbar-light{style: "background-color: #bfdffb;"}
+      .container-fluid
+        .navbar-header
+          .navbar-brand HOT-DESK
+        - if user_signed_in?
+          #navbar.navbar-collapse.collapse
+            %ul.nav.navbar-nav.navbar-right
+              %li.welcome-text
+                Logged In,  Hi #{current_user.name}
+              %li 
+                = link_to "Sign Out", destroy_user_session_path, method: :delete
+
+    %br/
+    .row
+      .col-md-2
+      .col-md-8
+        = yield
+      .col-md-2

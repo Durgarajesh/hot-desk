@@ -1,0 +1,14 @@
+%p
+	Name:
+	= alloted_user(@user_desk.created_by)
+%p
+	Email:
+	= alloted_user_email(@user_desk.created_by)
+%p
+	Desk:
+	= UserDesk::DESK[@user_desk.seat]
+%p
+	Date:
+	= formatted_dates(@user_desk.from_date, @user_desk.end_date)
+%p
+	= link_to "Back", user_desks_path, class: "btn btn-danger"

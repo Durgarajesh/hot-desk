@@ -1,0 +1,21 @@
+.row
+	.col-md-3
+	.col-md-6
+		= form_with model: @user_desk do |f|
+
+			= f.hidden_field :created_by, value: current_user.id
+			
+			.form-group
+				= f.label "Selec Seat"
+				= f.select(:seat, UserDesk::DESK_DETAILS, { prompt: 'Select Desk' }, class: "form-control")
+
+			.form-group
+				= f.label "From Date"
+				= f.date_field :from_date, min: Date.today, class: "form-control"
+			
+			.form-group
+				= f.label "End Date"
+				= f.date_field :end_date, min: Date.today, class: "form-control"
+
+			= f.submit "Update Slot", class: "btn btn-success"
+			= link_to "Cancel", user_desks_path, class: "btn btn-danger"

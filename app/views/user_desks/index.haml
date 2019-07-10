@@ -1,0 +1,36 @@
+%div.float-right
+	= link_to "Book Seat", new_user_desk_path, class: "btn btn-primary"
+	- if current_user.role == 'admin'
+		= link_to "Slots", "", class: "btn btn-info"
+		= link_to "Users", "", class: "btn btn-info"
+
+
+
+%hr
+%p
+	List of Bookings
+
+%table.table.table-bordered
+	%thead
+		%tr
+			%th
+				Name
+			%th
+				Desk
+			%th
+				From-To
+			%th
+				Actions
+	%tbody
+		- @user_desks.each do |desk|
+			%tr
+				%td
+					= alloted_user(desk.created_by)
+				%td
+					= UserDesk::DESK[desk.seat]
+				%td
+					= formatted_dates(desk.from_date, desk.end_date)
+				%td
+					= link_to 'View', user_desk_path(desk.id), class: "btn btn-primary"
+					- if current_user.id == desk.created_by
+						= link_to "Edit", edit_user_desk_path(desk.id), class: "btn btn-primary"
